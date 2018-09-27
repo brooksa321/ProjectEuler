@@ -7,27 +7,32 @@ import (
 )
 
 func splitNum(bigString string) []string {
-	return strings.Split(bigString, "")
+	cleanString := strings.Replace(strings.Replace(bigString, "\n", "", -1), "\t", "", -1)
+	//y := strings.Replace(x, "\t", "", -1)
+
+	return strings.Split(cleanString, "")
 }
 
-func stringsToNums(numString []string) []int {
-	var numInt []int
+func stringsToNums(numString []string) []int64 {
+	var numInt []int64
 	for _, num := range numString {
-		x, _ := strconv.Atoi(num)
+		x, _ := strconv.ParseInt(num, 10, 64)
 		numInt = append(numInt, x)
 	}
 	return numInt
 }
 
-func productOfThirteen(numSlice []int) int {
-	total := 1
+func productOfThirteen(numSlice []int64) int64 {
+	var total int64
+	total = 1
 	for _, i := range numSlice {
 		total *= i
 	}
+	//fmt.Println(numSlice, total)
 	return total
 }
 func main() {
-	var highProduct int
+	var highProduct int64
 	bigNum := `73167176531330624919225119674426574742355349194934
 				96983520312774506326239578318016984801869478851843
 				85861560789112949495459501737958331952853208805511
@@ -51,8 +56,8 @@ func main() {
 
 	split := stringsToNums(splitNum(bigNum))
 
-	for i := 0; i < len(bigNum)-12; i++ {
-		var productArray []int
+	for i := 0; i < len(split)-12; i++ {
+		var productArray []int64
 		for x := i; x <= i+12; x++ {
 			productArray = append(productArray, split[x])
 		}
@@ -60,11 +65,11 @@ func main() {
 
 		if totalProduct > highProduct {
 			highProduct = totalProduct
-			fmt.Println(productArray)
-			fmt.Println(highProduct)
+			//fmt.Println(productArray)
+			//fmt.Println(highProduct)
 		}
 	}
 
-	//fmt.Println(highProduct)
+	fmt.Println(highProduct)
 
 }
