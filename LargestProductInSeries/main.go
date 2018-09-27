@@ -8,8 +8,6 @@ import (
 
 func splitNum(bigString string) []string {
 	cleanString := strings.Replace(strings.Replace(bigString, "\n", "", -1), "\t", "", -1)
-	//y := strings.Replace(x, "\t", "", -1)
-
 	return strings.Split(cleanString, "")
 }
 
